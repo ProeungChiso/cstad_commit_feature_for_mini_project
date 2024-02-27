@@ -1,8 +1,4 @@
-CSTAD1,Product::1,1,2.0,2024-02-24,new
-CSTAD2,Product::1,1,2.0,2024-02-24,delete
-CSTAD3,Product::1,1,2.0,2024-02-24,update
-CSTAD4,Product::1,1,2.0,2024-02-24,null
-
-CSTAD4,Product::1,1,2.0,2024-02-24,null
-CSTAD4,Product::1,1,2.0,2024-02-24,null
+CSTAD1,Product::1,1,2.0,2024-02-24,null
+CSTAD2,Product::1,1,2.0,2024-02-24,null
+CSTAD3,Product::1,1,2.0,2024-02-24,null
 CSTAD4,Product::1,1,2.0,2024-02-24,null

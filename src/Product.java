@@ -14,7 +14,6 @@ public class Product {
         this.price = price;
         this.date = date;
         this.status = status;
-
     }
     public String getId(){
         return id;

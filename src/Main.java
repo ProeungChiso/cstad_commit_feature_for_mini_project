@@ -15,7 +15,8 @@ public class Main {
         System.out.println("========== CHOOSE ===========");
         System.out.println("A). Check in Data File");
         System.out.println("B). Check in Transfer File");
-        System.out.println("C). Exit");
+        System.out.println("C). Check CRUD");
+        System.out.println("D). Exit");
         String ops;
         do {
             System.out.print(">>> Choose: ");
@@ -28,14 +29,18 @@ public class Main {
                 case "b":
                     checkTransferFile(TRANSFER_FILE);
                     break;
-                case "c":
+                case "c":{
+                    System.out.println("Update Case!");
+                    break;
+                }
+                case "d":
                     checkTransferFile(TRANSFER_FILE);
                     System.out.println("Bye...");
                 default:
                     System.out.println("Case Invalided!");
                     break;
             }
-        }while(!(ops.equals("c")));
+        }while(!(ops.equals("d")));
     }
     public static void listOfDataRecord(){
         readFromFile(TRANSFER_FILE, productTransferFile);
