@@ -12,23 +12,30 @@ public class Main {
     public static List<Product> productDataFile = new ArrayList<>();
 
     public static void main(String[] args) {
-        System.out.println("CHOOSE");
-        System.out.println("Check in Data File");
-        System.out.println("Check in Transfer File");
-        System.out.print("Choose: ");
-        String ops = scanner.next().toLowerCase();
-        switch (ops) {
-            case "a":
-                readFromFile(DATA_FILE, productDataFile);
-                displayProduct(productDataFile);
-                break;
-            case "b":
-                checkTransferFile(TRANSFER_FILE);
-                break;
-            default:
-                System.out.println("Case Invalided!");
-                break;
-        }
+        System.out.println("========== CHOOSE ===========");
+        System.out.println("A). Check in Data File");
+        System.out.println("B). Check in Transfer File");
+        System.out.println("C). Exit");
+        String ops;
+        do {
+            System.out.print(">>> Choose: ");
+            ops = scanner.next().toLowerCase();
+            switch (ops) {
+                case "a":
+                    readFromFile(DATA_FILE, productDataFile);
+                    displayProduct(productDataFile);
+                    break;
+                case "b":
+                    checkTransferFile(TRANSFER_FILE);
+                    break;
+                case "c":
+                    checkTransferFile(TRANSFER_FILE);
+                    System.out.println("Bye...");
+                default:
+                    System.out.println("Case Invalided!");
+                    break;
+            }
+        }while(!(ops.equals("c")));
     }
     public static void listOfDataRecord(){
         readFromFile(TRANSFER_FILE, productTransferFile);
