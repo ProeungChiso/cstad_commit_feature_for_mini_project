@@ -9,46 +9,33 @@ public class Main {
     public static String TRANSFER_FILE = "transfer.txt";
     public static String DATA_FILE = "data.txt";
     public static List<Product> productTransferFile = new ArrayList<>();
+    public static List<Product> productDataFile = new ArrayList<>();
 
     public static void main(String[] args) {
-        checkTransferFile(TRANSFER_FILE);
+        System.out.println("CHOOSE");
+        System.out.println("Check in Data File");
+        System.out.println("Check in Transfer File");
+        System.out.print("Choose: ");
+        String ops = scanner.next().toLowerCase();
+        switch (ops) {
+            case "a":
+                readFromFile(DATA_FILE, productDataFile);
+                displayProduct(productDataFile);
+                break;
+            case "b":
+                checkTransferFile(TRANSFER_FILE);
+                break;
+            default:
+                System.out.println("Case Invalided!");
+                break;
+        }
     }
     public static void listOfDataRecord(){
-        readFromTransferFile(TRANSFER_FILE);
+        readFromFile(TRANSFER_FILE, productTransferFile);
         System.out.println("===================================================");
         System.out.println("              ---- Data Tracked ----               ");
         System.out.println("===================================================");
-        for (Product product : productTransferFile) {
-            System.out.print(product.getId()+" - ");
-            System.out.print(product.getProductName()+" - ");
-            System.out.print(product.getQty()+" - ");
-            System.out.print(product.getPrice()+" - ");
-            System.out.print(product.getDate()+" - ");
-            System.out.print(product.getStatus());
-            System.out.println();
-        }
-    }
-    public static void readFromTransferFile(String file){
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(",");
-                if (parts.length == 6) {
-                    Product product = new Product();
-                    product.setId(parts[0].trim());
-                    product.setProductName(parts[1].trim());
-                    product.setQty(Integer.parseInt(parts[2].trim()));
-                    product.setPrice(Double.parseDouble(parts[3].trim()));
-                    product.setDate(LocalDate.parse(parts[4].trim()));
-                    product.setStatus(parts[5].trim());
-                    productTransferFile.add(product);
-                } else {
-                    System.out.println("Invalid data in file: " + line);
-                }
-            }
-        } catch (IOException e) {
-            System.err.println("Error reading file: " + e.getMessage());
-        }
+        displayProduct(productTransferFile);
     }
     public static void checkTransferFile(String file){
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
@@ -73,7 +60,7 @@ public class Main {
         }
     }
     public static void writeToDataFile(String file){
-        try(BufferedWriter writeToDataFile = new BufferedWriter(new FileWriter(file))){
+        try(BufferedWriter writeToDataFile = new BufferedWriter(new FileWriter(file,true))){
             for (Product data : productTransferFile) {
                 writeToDataFile.write(data.getId()+",");
                 writeToDataFile.write(data.getProductName()+",");
@@ -93,6 +80,39 @@ public class Main {
             System.out.println("File has been cleared successfully.");
         }catch (IOException e){
             System.err.println("Error reading file: " + e.getMessage());
+        }
+    }
+    public static void readFromFile(String file, List<Product> LIST_NAME){
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts.length == 6) {
+                    Product product = new Product();
+                    product.setId(parts[0].trim());
+                    product.setProductName(parts[1].trim());
+                    product.setQty(Integer.parseInt(parts[2].trim()));
+                    product.setPrice(Double.parseDouble(parts[3].trim()));
+                    product.setDate(LocalDate.parse(parts[4].trim()));
+                    product.setStatus(parts[5].trim());
+                    LIST_NAME.add(product);
+                } else {
+                    System.out.println("Invalid data in file: " + line);
+                }
+            }
+        }catch(IOException e){
+            System.err.println("Error reading file: " + e.getMessage());
+        }
+    }
+    public static void displayProduct(List<Product> LIST_NAME){
+        for (Product product : LIST_NAME) {
+            System.out.print(product.getId()+" - ");
+            System.out.print(product.getProductName()+" - ");
+            System.out.print(product.getQty()+" - ");
+            System.out.print(product.getPrice()+" - ");
+            System.out.print(product.getDate()+" - ");
+            System.out.print(product.getStatus());
+            System.out.println();
         }
     }
 }
